@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_scope :user do
+    get 'users/refresh_token', to: 'sessions#refresh_token'
+  end
+
+  resources :posts
 end
